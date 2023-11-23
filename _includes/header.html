@@ -53,13 +53,13 @@
               </li>
               {% if site.blog_nav_title %}
               <!-- Blog -->
-              <li class="nav-item {% if page.url contains 'blog' %}active{% endif %}">
+              <!-- <li class="nav-item {% if page.url contains 'blog' %}active{% endif %}">
                 <a class="nav-link" href="{{ '/blog/' | relative_url }}">{{ site.blog_nav_title }}
                   {%- if page.url contains 'blog' -%}
                   <span class="sr-only">(current)</span>
                   {%- endif -%}
                 </a>
-              </li>
+              </li> -->
               {%- endif %}
 
               <!-- Other pages -->
@@ -85,7 +85,11 @@
               </li>
               {%- else %}
               <li class="nav-item {% if page.title == p.title %}active{% endif %}">
-                <a class="nav-link" href="{{ p.url | relative_url }}">{{ p.title }}
+                {% assign nav_link_href = p.url | relative_url %}
+                {% if p.title == 'cv' %}
+                {% assign nav_link_href = p.cv_pdf | prepend: 'assets/pdf/' | relative_url %}
+                {% endif %}
+                <a class="nav-link" href="{{ nav_link_href }}">{{ p.title }}
                   {%- if page.title == p.title -%}
                   <span class="sr-only">(current)</span>
                   {%- endif -%}
